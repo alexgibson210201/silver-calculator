@@ -9,6 +9,18 @@ html, body, [class*="css"], code {
     font-family: "Segoe UI", sans-serif !important;
 }
 
+/* Tighten the space under the title */
+h1 {
+    padding-bottom: 1rem !important;
+    margin-bottom: 0 !important;
+}
+
+/* Collapse the invisible element that holds this <style> block */
+div[data-testid="stElementContainer"]:has(> div[data-testid="stMarkdown"] style),
+div[data-testid="stElementContainer"]:has(style) {
+    display: none;
+}
+
 /* Pull the whole page up */
 
 header[data-testid="stHeader"] {
