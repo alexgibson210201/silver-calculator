@@ -5,8 +5,24 @@ st.title("Silver Calculator")
 
 st.markdown("""
 <style>
-html, body, [class*="css"] {
-    font-family: "Segoe UI", sans-serif;
+html, body, [class*="css"], code {
+    font-family: "Segoe UI", sans-serif !important;
+}
+
+/* Pull the whole page up */
+
+header[data-testid="stHeader"] {
+    display: none;
+}
+
+.block-container,
+[data-testid="stMainBlockContainer"] {
+    padding-top: 4rem !important;
+}
+
+/* Trim the gap above the title */
+h1 {
+    padding-top: 0 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -19,6 +35,9 @@ if "gbp_usd" not in st.session_state:
 
 if "gold_spot_price" not in st.session_state:
     st.session_state.gold_spot_price = 0.0
+
+if "prices_loaded" not in st.session_state:
+    st.session_state.prices_loaded = False
 
 @st.cache_data(ttl=300)
 def latest_close(symbol: str) -> float:
@@ -33,6 +52,9 @@ if st.button("Retrieve Latest Gold, Silver & USD Prices"):
         st.session_state.silver_spot_price = latest_close("SI=F")
         st.session_state.gold_spot_price = latest_close("GC=F")
         st.session_state.gbp_usd = latest_close("GBPUSD=X")
+
+        st.session_state.prices_loaded = True
+
     except Exception as e:
         st.error(f"Failed to retrieve prices: {e}. You can enter them manually below.")
 
@@ -40,6 +62,8 @@ st.number_input("Spot Price ($/troy oz)", min_value=0.0, step=0.001,
                 format="%.3f", key="silver_spot_price")
 st.number_input("GBP USD ($)", min_value=0.0, step=0.0001,
                 format="%.4f", key="gbp_usd")
+st.number_input("Gold Spot Price ($/troy oz)", min_value=0.0, step=0.001,
+                format="%.3f", key="gold_spot_price")
 
 prices_available = (st.session_state.silver_spot_price > 0
                     and st.session_state.gbp_usd > 0
@@ -48,20 +72,23 @@ prices_available = (st.session_state.silver_spot_price > 0
 # Gold to Silver Ratio
 gold_silver_ratio = 0.0
 
-if (
-    st.session_state.silver_spot_price > 0
-    and st.session_state.gold_spot_price > 0
-    and st.session_state.gbp_usd > 0
-):
-    gold_silver_ratio = (
-        st.session_state.gold_spot_price
-        / st.session_state.silver_spot_price
-    )
+if prices_available and st.session_state.gold_spot_price > 0:
+    gold_silver_ratio = (st.session_state.gold_spot_price
+                         / st.session_state.silver_spot_price)
+
+if prices_available:
+    msg = (f"Silver: \\${st.session_state.silver_spot_price:.2f} per oz, "
+           f"GBP/USD: {st.session_state.gbp_usd:.4f}")
+    if gold_silver_ratio > 0:
+        msg += (f", Gold: \\${st.session_state.gold_spot_price:.2f} per oz, "
+                f"Gold/Silver Ratio: {gold_silver_ratio:.2f}")
+    # st.success("Prices ready. " + msg)
 
 if st.session_state.silver_spot_price > 0 and st.session_state.gbp_usd > 0 and st.session_state.gold_spot_price > 0:
     st.success(
-        f"Gold, Silver & USD prices retrieved successfully: "
-        f"${st.session_state.silver_spot_price:.2f} per oz, "
+        f"Gold, Silver & USD prices retrieved successfully. "
+        f"Silver: \\${st.session_state.silver_spot_price:.2f} per oz, "
+        f"Gold: \\${st.session_state.gold_spot_price:.2f} per oz, "
         f"GBP/USD: {st.session_state.gbp_usd:.4f}, "
         f"Gold/Silver Ratio: {gold_silver_ratio:.2f}"
     )
@@ -141,7 +168,7 @@ else:
 col1, col2 = st.columns(2)
 
 with col1:
-    if st.button("Calculate"):
+    if st.button("Calculate", disabled=not prices_available):
         # Troy calcs
         if weight_type == "Troy Ounces":
             troy_convert = weight
@@ -165,6 +192,12 @@ with col1:
         st.success(f"Brittania Melt Value = £{brittania_value:,.2f}")
 
 def clear_inputs():
+
+    st.session_state.prices_loaded = False
+
+    st.session_state["silver_spot_price"] = 0.0
+    st.session_state["gold_spot_price"] = 0.0
+    st.session_state["gbp_usd"] = 0.0
 
     st.session_state["weight_type"] = "Troy Ounces"
 
