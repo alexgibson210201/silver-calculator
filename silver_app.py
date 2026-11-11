@@ -184,11 +184,11 @@ with col1:
     if st.button("Calculate", disabled=not prices_available):
         # Troy calcs
         if weight_type == "Troy Ounces":
-            troy_convert = weight
+            troy_convert = round(weight, 2)
         elif weight_type == "Avoirdupois Ounces":
-            troy_convert = weight * troy_ounce
+            troy_convert = round(weight * troy_ounce, 2)
         elif weight_type == "Grams":
-            troy_convert = weight / grams_per_Troy
+            troy_convert = round(weight / grams_per_Troy, 2)
 
         st_silver_content = sterling_silver * troy_convert
         sterling_value = (st_silver_content * st.session_state.silver_spot_price) * st_conv_value
