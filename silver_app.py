@@ -102,7 +102,7 @@ if st.session_state.silver_spot_price > 0 and st.session_state.gbp_usd > 0 and s
         f"Silver: \\${st.session_state.silver_spot_price:.2f} per oz, "
         f"Gold: \\${st.session_state.gold_spot_price:.2f} per oz, "
         f"GBP/USD: {st.session_state.gbp_usd:.4f}, "
-        f"Gold/Silver Ratio: {gold_silver_ratio:.2f}"
+        f"(Sausage) Gold/Silver Ratio: {gold_silver_ratio:.2f}"
     )
 
 # st.stop()
