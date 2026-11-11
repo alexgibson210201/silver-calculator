@@ -88,12 +88,12 @@ if prices_available and st.session_state.gold_spot_price > 0:
     gold_silver_ratio = (st.session_state.gold_spot_price
                          / st.session_state.silver_spot_price)
 
-if prices_available:
-    msg = (f"Silver: \\${st.session_state.silver_spot_price:.2f} per oz, "
-           f"GBP/USD: {st.session_state.gbp_usd:.4f}")
-    if gold_silver_ratio > 0:
-        msg += (f", Gold: \\${st.session_state.gold_spot_price:.2f} per oz, "
-                f"Gold/Silver Ratio: {gold_silver_ratio:.2f}")
+# if prices_available:
+    # msg = (f"Silver: \\${st.session_state.silver_spot_price:.2f} per oz, "
+      # f"GBP/USD: {st.session_state.gbp_usd:.4f}")
+    # if gold_silver_ratio > 0:
+      # msg += (f", Gold: \\${st.session_state.gold_spot_price:.2f} per oz, "
+       #         f"Gold/Silver Ratio: {gold_silver_ratio:.2f}")
     # st.success("Prices ready. " + msg)
 
 if st.session_state.silver_spot_price > 0 and st.session_state.gbp_usd > 0 and st.session_state.gold_spot_price > 0:
