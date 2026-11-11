@@ -88,7 +88,8 @@ if prices_available:
     gold_silver_ratio = (st.session_state.gold_spot_price
                          / st.session_state.silver_spot_price)
 
-if st.session_state.silver_spot_price > 0 and st.session_state.gbp_usd > 0 and st.session_state.gold_spot_price > 0:
+# if st.session_state.silver_spot_price > 0 and st.session_state.gbp_usd > 0 and st.session_state.gold_spot_price > 0:
+if prices_available: 
     st.success(
         f"Gold, Silver & USD prices retrieved successfully. "
         f"Silver: \\${st.session_state.silver_spot_price:.2f} per oz, "
@@ -181,21 +182,21 @@ with col1:
         elif weight_type == "Grams":
             troy_convert = round(weight / grams_per_Troy, 2)
 
-        st.write("Troy Convert is:", troy_convert)
+        # st.write("Troy Convert is:", troy_convert)
 
         st_silver_content = round(sterling_silver * troy_convert, 2)
-        st.write("st_silver_content:", st_silver_content)
+        # st.write("st_silver_content:", st_silver_content)
         sterling_value = (st_silver_content * st.session_state.silver_spot_price) * st_conv_value
         
         st.success(f"Sterling Melt Value = £{sterling_value:,.2f}")
 
-        st.write("Silver Price:", st.session_state.silver_spot_price)
-        st.write("GBP/USD:", st.session_state.gbp_usd)
-        st.write("Weight:", weight)
-        st.write("Conversion:", st_conv_value)
+        # st.write("Silver Price:", st.session_state.silver_spot_price)
+        # st.write("GBP/USD:", st.session_state.gbp_usd)
+        # st.write("Weight:", weight)
+        # st.write("Conversion:", st_conv_value)
 
         br_silver_content = round(brittania_silver * troy_convert, 2)
-        st.write("br_silver_content:", br_silver_content)
+        # st.write("br_silver_content:", br_silver_content)
         brittania_value = (br_silver_content * st.session_state.silver_spot_price) * st_conv_value
         
         st.success(f"Brittania Melt Value = £{brittania_value:,.2f}")
