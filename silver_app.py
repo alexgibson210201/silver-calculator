@@ -181,7 +181,7 @@ with col1:
         elif weight_type == "Grams":
             troy_convert = round(weight / grams_per_Troy, 2)
 
-        st_silver_content = (sterling_silver * troy_convert, 2)
+        st_silver_content = round(sterling_silver * troy_convert, 2)
         st.write("st_silver_content:", st_silver_content)
         sterling_value = (st_silver_content * st.session_state.silver_spot_price) * st_conv_value
 
@@ -193,7 +193,7 @@ with col1:
 
         st.success(f"Sterling Melt Value = £{sterling_value:,.2f}")
 
-        br_silver_content = (brittania_silver * troy_convert, 2)
+        br_silver_content = round(brittania_silver * troy_convert, 2)
         st.write("br_silver_content:", br_silver_content)
         brittania_value = (br_silver_content * st.session_state.silver_spot_price) * st_conv_value
         st.success(f"Brittania Melt Value = £{brittania_value:,.2f}")
