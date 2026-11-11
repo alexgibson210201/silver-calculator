@@ -88,7 +88,6 @@ if prices_available:
     gold_silver_ratio = (st.session_state.gold_spot_price
                          / st.session_state.silver_spot_price)
 
-# if st.session_state.silver_spot_price > 0 and st.session_state.gbp_usd > 0 and st.session_state.gold_spot_price > 0:
 if prices_available: 
     st.success(
         f"Gold, Silver & USD prices retrieved successfully. "
@@ -106,7 +105,7 @@ if prices_available:
 troy_ounce: float = 0.9115 # Of an Avoirdupois ounce
 
 # Avoirdupois
-adp_ounce: float = 1.0971 # Of a Troy Ounce
+# adp_ounce: float = 1.0971 # Of a Troy Ounce
 
 # Metric
 grams_per_Troy: float = 31.1035 # Grams in a Troy Ounce
