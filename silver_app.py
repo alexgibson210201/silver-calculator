@@ -193,6 +193,7 @@ with col1:
         st_silver_content = sterling_silver * troy_convert
         sterling_value = (st_silver_content * st.session_state.silver_spot_price) * st_conv_value
 
+        st.write("Troy Convert is: troy_convert)
         # st.write("Silver Price:", st.session_state.silver_spot_price)
         # st.write("GBP/USD:", st.session_state.gbp_usd)
         # st.write("Weight:", weight)
