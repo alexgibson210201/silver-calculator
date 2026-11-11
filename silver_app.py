@@ -61,9 +61,9 @@ def latest_close(symbol: str) -> float:
 
 if st.button("Retrieve Latest Gold, Silver & USD Prices"):
     try:
-        st.session_state.silver_spot_price = latest_close("SI=F")
-        st.session_state.gold_spot_price = latest_close("GC=F")
-        st.session_state.gbp_usd = latest_close("GBPUSD=X")
+        st.session_state.silver_spot_price = round(latest_close("SI=F"), 3)
+        st.session_state.gold_spot_price = round(latest_close("GC=F"), 3)
+        st.session_state.gbp_usd = round(latest_close("GBPUSD=X"), 3)
 
         st.session_state.prices_loaded = True
 
@@ -165,7 +165,7 @@ st_silver_content = 0.0
 br_silver_content = 0.0
 
 if st.session_state.gbp_usd != 0:
-    st_conv_value = 1 / st.session_state.gbp_usd
+    st_conv_value = round(1 / st.session_state.gbp_usd, 3)
 else:
     st_conv_value = 0
 
