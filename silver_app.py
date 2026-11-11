@@ -85,7 +85,7 @@ prices_available = (st.session_state.silver_spot_price > 0
 gold_silver_ratio = 0.0
 
 # if prices_available and st.session_state.gold_spot_price > 0:
-if prices_availabe: 
+if prices_available: 
     gold_silver_ratio = (st.session_state.gold_spot_price
                          / st.session_state.silver_spot_price)
 
