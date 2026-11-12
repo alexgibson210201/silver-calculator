@@ -48,6 +48,9 @@ if "gbp_usd" not in st.session_state:
 if "gold_spot_price" not in st.session_state:
     st.session_state.gold_spot_price = 0.0
 
+if "dow_jones" not in st.session_state:
+    st.session_state.dow_jones = 0.0
+
 if "prices_loaded" not in st.session_state:
     st.session_state.prices_loaded = False
 
