@@ -9,14 +9,14 @@ html, body, [class*="css"], code {
     font-family: "Segoe UI", sans-serif !important;
 }
 
-/* Tighten the space under the title */
+/* Tighten the space under the title & trim the gap above the title */
 h1 {
     padding-bottom: 1rem !important;
     margin-bottom: 0 !important;
+    padding-top: 0 !important;
 }
 
 /* Collapse the invisible element that holds this <style> block */
-div[data-testid="stElementContainer"]:has(> div[data-testid="stMarkdown"] style),
 div[data-testid="stElementContainer"]:has(style) {
     display: none;
 }
@@ -32,10 +32,6 @@ header[data-testid="stHeader"] {
     padding-top: 4rem !important;
 }
 
-/* Trim the gap above the title */
-h1 {
-    padding-top: 0 !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
