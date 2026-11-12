@@ -62,7 +62,7 @@ def latest_close(symbol: str) -> float:
         raise ValueError(f"No data returned for {symbol}")
     return float(closes.iloc[-1])
 
-if st.button("Retrieve Latest Gold, Silver & USD Prices"):
+if st.button("Retrieve Latest Gold, Silver, GBP/USD & Dow Jones Prices"):
     try:
         st.session_state.silver_spot_price = round(latest_close("SI=F"), 3)
         st.session_state.gold_spot_price = round(latest_close("GC=F"), 3)
