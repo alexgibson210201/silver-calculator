@@ -64,6 +64,7 @@ if st.button("Retrieve Latest Gold, Silver & USD Prices"):
         st.session_state.silver_spot_price = round(latest_close("SI=F"), 3)
         st.session_state.gold_spot_price = round(latest_close("GC=F"), 3)
         st.session_state.gbp_usd = round(latest_close("GBPUSD=X"), 3)
+        st.session_state.dow_jones = round(latest_close("^DJI"), 3)
 
         st.session_state.prices_loaded = True
 
@@ -81,12 +82,18 @@ prices_available = (st.session_state.silver_spot_price > 0
                     and st.session_state.gbp_usd > 0
                     and st.session_state.gold_spot_price > 0)
 
-# Gold to Silver Ratio
+dj_available = (st.session_state.dow_jones > 0)
+
+# Gold/Silver * DJ/Gold Ratio
 gold_silver_ratio = 0.0
+dj_gold_ratio = 0.0
 
 if prices_available: 
     gold_silver_ratio = (st.session_state.gold_spot_price
                          / st.session_state.silver_spot_price)
+
+if dj_available: 
+    dj_gold_ratio = (st.session_state.dow_jones / st.session_state.gold_spot_price)
 
 if prices_available: 
     st.success(
@@ -94,7 +101,8 @@ if prices_available:
         f"Silver: \\${st.session_state.silver_spot_price:.2f} per oz, "
         f"Gold: \\${st.session_state.gold_spot_price:.2f} per oz, "
         f"GBP/USD: {st.session_state.gbp_usd:.4f}, "
-        f"Gold/Silver Ratio: {gold_silver_ratio:.2f}"
+        f"Gold/Silver Ratio: {gold_silver_ratio:.2f}, "
+        f"Dow Jones/Gold Ratio: {dj_gold_ratio:.2f}"
     )
 
 # st.stop()
