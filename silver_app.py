@@ -74,8 +74,6 @@ if st.button("Retrieve Latest Gold, Silver & USD Prices"):
     except Exception as e:
         st.error(f"Failed to retrieve prices: {e}. You can enter them manually below.")
 
-st.write("Dow Jones is: ", st.session_state.dow_jones)
-
 st.number_input("Spot Price ($/troy oz)", min_value=0.0, step=0.001,
                 format="%.3f", key="silver_spot_price")
 st.number_input("GBP USD ($)", min_value=0.0, step=0.0001,
@@ -194,6 +192,7 @@ with col1:
             troy_convert = round(weight / grams_per_Troy, 2)
 
         # st.write("Troy Convert is:", troy_convert)
+        st.write("Dow Jones is:", dow_jones)
 
         st_silver_content = round(sterling_silver * troy_convert, 2)
         # st.write("st_silver_content:", st_silver_content)
