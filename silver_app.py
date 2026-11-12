@@ -156,7 +156,6 @@ elif weight_type == "Grams":
         disabled=not prices_available
     )
 
-
 # Other variables
 troy_convert = 0.0
 sterling_value = 0.0
