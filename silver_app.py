@@ -87,7 +87,7 @@ prices_available = (st.session_state.silver_spot_price > 0
 
 dj_available = (st.session_state.dow_jones > 0)
 
-# Gold/Silver * DJ/Gold Ratio
+# Gold/Silver & DJ/Gold Ratio
 gold_silver_ratio = 0.0
 dj_gold_ratio = 0.0
 
@@ -192,7 +192,7 @@ with col1:
             troy_convert = round(weight / grams_per_Troy, 2)
 
         # st.write("Troy Convert is:", troy_convert)
-        # st.write("Dow Jones is:", st.session_state.dow_jones)
+        st.write("Dow Jones is:", st.session_state.dow_jones)
         
         st_silver_content = round(sterling_silver * troy_convert, 2)
         # st.write("st_silver_content:", st_silver_content)
