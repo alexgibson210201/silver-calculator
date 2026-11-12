@@ -85,7 +85,8 @@ prices_available = (st.session_state.silver_spot_price > 0
                     and st.session_state.gbp_usd > 0
                     and st.session_state.gold_spot_price > 0)
 
-dj_available = (st.session_state.dow_jones > 0)
+dj_available = (st.session_state.dow_jones > 0
+                and st.session_state.gold_spot_price > 0)
 
 # Gold/Silver & DJ/Gold Ratio
 gold_silver_ratio = 0.0
@@ -218,6 +219,7 @@ def clear_inputs():
     st.session_state["silver_spot_price"] = 0.0
     st.session_state["gold_spot_price"] = 0.0
     st.session_state["gbp_usd"] = 0.0
+    st.session_state["dow_jones"] = 0.0
 
     st.session_state["weight_type"] = "Troy Ounces"
 
